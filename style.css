@@ -1,3 +1,117 @@
-body { font-family: sans-serif; background-color: #f4f4f4; color: #333; padding: 20px; }
-.comando { background: white; padding: 15px; margin-bottom: 10px; border-left: 5px solid #2ecc71; border-radius: 4px; }
-h1 { color: #2c3e50; }
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg-deep: #080b12;
+  --bg-gradient: radial-gradient(ellipse at top left, #111827 0%, #080b12 60%);
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-cyan: #22d3ee;
+  --accent-purple: #a855f7;
+  --gradient-accent: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+  --shadow-default: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 16px 48px rgba(34, 211, 238, 0.12), 0 0 24px rgba(168, 85, 247, 0.15);
+  --radius-lg: 18px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg-deep);
+  background-image: var(--bg-gradient);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 60px 24px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 48px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.02em;
+}
+
+.comando {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: var(--shadow-default);
+  overflow: hidden;
+}
+
+.comando::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: var(--gradient-accent);
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  opacity: 0.85;
+  transition: all 0.3s ease;
+}
+
+.comando:hover {
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(34, 211, 238, 0.25);
+}
+
+.comando:hover::before {
+  width: 8px;
+  filter: drop-shadow(0 0 12px var(--accent-cyan));
+  opacity: 1;
+}
+
+.comando h2, 
+.comando h3, 
+.comando .comando-titulo {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--accent-cyan);
+  margin-bottom: 12px;
+  position: relative;
+  display: inline-block;
+}
+
+.comando p,
+.comando .comando-desc {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: -1;
+}
